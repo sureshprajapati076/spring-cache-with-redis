@@ -1,0 +1,17 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/student
+    username: test
+    password: test
+---
+spring:
+  data:
+    redis:
+     host: redis-15724.c100.us-east-1-4.ec2.redns.redis-cloud.com  # use this if you want to connect to redis cloud
+     port: 15724
+     username: default
+     password: CyOw9jGreheXJJS5PtoOv7zkeoe3ocGf
+---
+# docker run -p 6379:6379 -d --name redis6 redis:latest
