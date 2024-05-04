@@ -19,12 +19,7 @@ public class MyService {
 
     @Cacheable("allstds")
     public List<Student> getAll() {
-        System.out.println("FETCHING FROM DB");
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        manualDelay("FETCHING FROM DB");
         return studentDaoService.findAll();
     }
 
@@ -35,12 +30,22 @@ public class MyService {
 
     @Cacheable(key = "#id", value = "std")
     public Student findById(Integer id) {
-        System.out.println("FETCHING FOR STUDENT WITH ID: "+id);
+        manualDelay("FETCHING FOR STUDENT WITH ID: "+id);
         return studentDaoService.findById(id);
     }
 
     @CachePut(key="#id", value = "std")
+    @CacheEvict(value = "allstds", allEntries = true)
     public Student updateStudent(Integer id, UpdateStudentDto updateStudentDto) {
         return studentDaoService.updateStd(id,updateStudentDto);
+    }
+
+    private void manualDelay(String msg) {
+        System.out.println(msg);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
