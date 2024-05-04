@@ -14,4 +14,9 @@ spring:
      username: default
      password: CyOw9jGreheXJJS5PtoOv7zkeoe3ocGf
 ---
+
+spring:
+  cache:
+    redis:
+      time-to-live: 60S
 # docker run -p 6379:6379 -d --name redis6 redis:latest
